@@ -9,18 +9,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ekncyln.wordapp.R;
-import com.ekncyln.wordapp.entities.CardSet;
+import com.ekncyln.wordapp.entities.Set;
 
 import java.util.List;
 
 // Setlerin bilgilerini gösteren cardView ile setleri bağlayan adaptör
 public class SetCardAdapter extends RecyclerView.Adapter<SetCardView> {
     private Context ctx;  // konteks
-    private List<CardSet> cardSets;  // veri kümesi
+    private List<Set> sets;  // veri kümesi
 
-    public SetCardAdapter(Context ctx, List<CardSet> cardSets) {
+    public SetCardAdapter(Context ctx, List<Set> sets) {
         this.ctx = ctx;
-        this.cardSets = cardSets;
+        this.sets = sets;
     }
 
     @NonNull
@@ -32,20 +32,20 @@ public class SetCardAdapter extends RecyclerView.Adapter<SetCardView> {
 
     @Override
     public void onBindViewHolder(@NonNull SetCardView holder, int position) {
-        CardSet cardSet = cardSets.get(position);
-        int prog = cardSet.GetExpertCount();
-        int secondaryProg = cardSet.GetLearningCount();
-        int size = cardSet.Cards.size();
+        Set set = sets.get(position);
+        int prog = set.GetExpertCount();
+        int secondaryProg = set.GetLearningCount();
+        int size = set.Cards.size();
 
-        holder.txtTitle.setText(cardSet.Title);
+        holder.txtTitle.setText(set.Title);
         holder.txtCount.setText(String.valueOf(size));
         holder.barExpert.setProgress(prog);
         holder.barExpert.setSecondaryProgress(prog + secondaryProg);
-
+        holder.nbrSetId.setText(String.valueOf(position));
     }
 
     @Override
     public int getItemCount() {
-        return cardSets.size();
+        return sets.size();
     }
 }
