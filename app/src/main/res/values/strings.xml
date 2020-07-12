@@ -3,4 +3,6 @@
     <string name="word_record">Records</string>
     <string name="cards">Cards</string>
     <string name="learn">Learn</string>
+    <string name="repeat">Study Again</string>
+    <string name="gotIt">Got It</string>
 </resources>

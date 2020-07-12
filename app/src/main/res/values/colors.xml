@@ -7,5 +7,7 @@
     <color name="colorContent">#111111</color>
     <color name="colorExpert">#4CAF50</color>
     <color name="colorKnown">#F24CAF50</color>
+    <color name="colorUnknown">#FFC107</color>
     <color name="colorBgGray">#F0F0F0</color>
+    <color name="colorBgApp">#E7F8FF</color>
 </resources>

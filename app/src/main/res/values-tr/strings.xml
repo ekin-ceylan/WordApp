@@ -3,4 +3,6 @@
     <string name="word_record">Kayıt</string>
     <string name="cards">Kartlar</string>
     <string name="learn">Öğren</string>
+    <string name="repeat">Tekrar Çalış</string>
+    <string name="gotIt">Anladım</string>
 </resources>

@@ -1,31 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_marginHorizontal="50dp"
+    android:layout_marginVertical="100dp"
     android:background="@color/design_default_color_background"
+    android:elevation="8dp"
     android:gravity="center"
-    android:orientation="vertical"
-    android:padding="10dp">
+    android:orientation="vertical">
 
     <TextView
-        android:id="@+id/txtTestWord"
+        android:id="@+id/txtStudyAgain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="24sp" />
+        android:alpha="0"
+        android:background="@color/colorUnknown"
+        android:gravity="center_horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="@string/repeat"
+        android:textColor="@color/colorContent"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/txtTestMeaning"
+        android:id="@+id/txtGotIt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="24sp" />
+        android:alpha="0"
+        android:background="@color/colorKnown"
+        android:gravity="center_horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="@string/gotIt"
+        android:textColor="@color/design_default_color_on_primary"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/txtTestSample"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="24sp" />
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/txtTestWord"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="TextView"
+            android:textColor="@color/colorContent"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtTestMeaning"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="TextView"
+            android:textColor="@color/colorContent"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/txtTestSample"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="TextView"
+            android:textColor="@color/colorContent"
+            android:textSize="24sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

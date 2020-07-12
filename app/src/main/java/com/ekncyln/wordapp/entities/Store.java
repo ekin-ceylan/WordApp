@@ -60,6 +60,12 @@ public class Store extends Application {
                     Word = "break apart";
                     Meaning = "parçalara ayırmak";
                     Level = 7;
+                }},
+                prefer = new Card(){{
+                    Word = "prefer";
+                    Meaning = "bir şeyi veya bir kimseyi diğerine tercih etmek";
+                    Level = 3;
+                    Sample = "Some people prefer camping to staying in hotels.";
                 }};
 
         Set verb = new Set(){{
@@ -77,6 +83,7 @@ public class Store extends Application {
         verb.Cards.add(purport);
         verb.Cards.add(withstand);
         verb.Cards.add(breakApart);
+        verb.Cards.add(prefer);
 
         adjective.Cards.add(plush);
         adjective.Cards.add(fatal);

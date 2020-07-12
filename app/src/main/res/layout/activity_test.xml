@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,18 +7,53 @@
     android:gravity="center"
     tools:context=".TestActivity">
 
-    <StackView
+    <com.lorentzos.flingswipe.SwipeFlingAdapterView
         android:id="@+id/stcViewCard"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:minWidth="250dp" />
+        android:layout_height="match_parent"
+        android:background="@color/colorBgApp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:rotation_degrees="15.5">
 
-</RelativeLayout>
+    </com.lorentzos.flingswipe.SwipeFlingAdapterView>
+
+    <TextView
+        android:id="@+id/txtWrong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
+        android:background="@color/colorUnknown"
+        android:gravity="center_horizontal"
+        android:paddingLeft="15dp"
+        android:paddingTop="10dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="10dp"
+        android:text="0"
+        android:textColor="@color/colorContent"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txtCorrect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
+        android:background="@color/colorKnown"
+        android:paddingLeft="15dp"
+        android:paddingTop="10dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="10dp"
+        android:text="0"
+        android:textColor="@color/design_default_color_on_primary"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center_horizontal" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

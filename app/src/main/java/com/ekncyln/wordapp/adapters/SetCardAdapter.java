@@ -41,7 +41,7 @@ public class SetCardAdapter extends RecyclerView.Adapter<SetCardView> {
         holder.txtCount.setText(String.valueOf(size));
         holder.barExpert.setProgress(prog);
         holder.barExpert.setSecondaryProgress(prog + secondaryProg);
-        holder.nbrSetId.setText(String.valueOf(position));
+        holder.nbrSetId.setText(set.Key);
     }
 
     @Override

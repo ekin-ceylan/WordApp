@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "270729277385",
+    "firebase_url": "https://wordapp-2ab9e.firebaseio.com",
+    "project_id": "wordapp-2ab9e",
+    "storage_bucket": "wordapp-2ab9e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:270729277385:android:cefe22e9ec6661764cc218",
+        "android_client_info": {
+          "package_name": "com.ekncyln.wordapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "270729277385-lp94k951njmslkcapmu13u6iuofkkcbi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ekncyln.wordapp",
+            "certificate_hash": "767160048bd297d5bf7570cc82d649ca54681927"
+          }
+        },
+        {
+          "client_id": "270729277385-6jhugm5rqoc85pbldgslrof1b4405ipd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC31ryzoS22ZD04ijH2br8Lo6BbM_KS-Os"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "270729277385-6jhugm5rqoc85pbldgslrof1b4405ipd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

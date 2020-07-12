@@ -1,11 +1,16 @@
 package com.ekncyln.wordapp.entities;
 
-import java.util.List;
+import java.io.Serializable;
+import java.util.ArrayList;
 
-public class Set {
-    public int Id;
+public class Set implements Serializable {
+    public String Key;
     public String Title;
-    public List<Card> Cards;
+    public ArrayList<Card> Cards;
+
+    public Set() {
+        this.Cards = new ArrayList<Card>();
+    }
 
     public int GetExpertCount(){
         if (this.Cards.size() == 0)

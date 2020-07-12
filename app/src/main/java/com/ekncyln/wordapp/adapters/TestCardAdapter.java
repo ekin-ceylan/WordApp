@@ -1,6 +1,7 @@
 package com.ekncyln.wordapp.adapters;
 
 import android.content.Context;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +48,12 @@ public class TestCardAdapter extends ArrayAdapter {
 
         if (convertView == null){
             convertView = LayoutInflater.from(parent.getContext()).inflate(itemLayout, parent, false);
+        }
+
+        if (position == 0){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                convertView.setTranslationZ(8);
+            }
         }
 
         TextView txtTestWord = convertView.findViewById(R.id.txtTestWord);

@@ -37,7 +37,7 @@ public class SetCardView extends RecyclerView.ViewHolder {
             public void onClick(View v) {
                 Intent intentSet = new Intent(v.getContext(), SetActivity.class);
 
-                intentSet.putExtra("setId", Integer.parseInt(nbrSetId.getText().toString()));
+                intentSet.putExtra("setId", nbrSetId.getText().toString());
 
                 Toast.makeText(v.getContext(), nbrSetId.getText(), Toast.LENGTH_LONG).show();
 
