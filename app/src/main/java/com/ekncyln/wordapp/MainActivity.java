@@ -8,21 +8,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.ekncyln.wordapp.adapters.SetCardAdapter;
 import com.ekncyln.wordapp.entities.Card;
 import com.ekncyln.wordapp.entities.Set;
-import com.ekncyln.wordapp.entities.Store;
 import com.ekncyln.wordapp.helpers.FirebaseHelper;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
@@ -32,24 +28,16 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView rcvSet;
     private FloatingActionButton btnAddSet;
 
-    private ArrayList<Set> sets;
     private SetCardAdapter setCardAdapter;
-    private Store store;
 
-    private FirebaseDatabase firebaseWordAppDb;
-    private DatabaseReference cardsRef;
-    private DatabaseReference setsRef;
+    FirebaseHelper firebaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        FirebaseHelper helper = new FirebaseHelper();
-
-        this.firebaseWordAppDb = FirebaseDatabase.getInstance();
-        this.sets = new ArrayList<Set>();
-
-        this.GetSets();
+        firebaseHelper = new FirebaseHelper();
+        Toast.makeText(MainActivity.this, "create", Toast.LENGTH_LONG).show();
 
         btnAddSet = findViewById(R.id.btnAddSet);
         rcvSet = findViewById(R.id.rcvSet);
@@ -57,9 +45,10 @@ public class MainActivity extends AppCompatActivity {
         rcvSet.setHasFixedSize(true);
         rcvSet.setLayoutManager(new LinearLayoutManager(this));
 
-        //store = (Store) getApplicationContext();
-        setCardAdapter = new SetCardAdapter(this, this.sets);
+        setCardAdapter = new SetCardAdapter(this, new ArrayList<Set>());
         rcvSet.setAdapter(setCardAdapter);
+
+        GetSets();
 
         btnAddSet.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,54 +62,46 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        setCardAdapter.sets= new ArrayList<Set>();
+        setCardAdapter.notifyDataSetChanged();
+
+        GetSets();
+        Toast.makeText(MainActivity.this, "restart", Toast.LENGTH_LONG).show();
+    }
+
     private void GetSets(){
-        this.setsRef = firebaseWordAppDb.getReference("Sets");
-
-        this.setsRef.addValueEventListener(new ValueEventListener() {
-
+        firebaseHelper.GetSets().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    int index = 0;
 
-                for (DataSnapshot d : dataSnapshot.getChildren()) {
-                    Set set = d.getValue(Set.class);
-                    set.Key = d.getKey();
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Set set = document.toObject(Set.class);
+                        setCardAdapter.sets.add(set);
+                        GetCards(set, index++);
+                    }
 
-                    sets.add(set);
-                    GetCards(set);
+                    setCardAdapter.notifyDataSetChanged();
                 }
-
-                setCardAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
     }
 
-    private void GetCards(final Set set){
-        this.cardsRef = firebaseWordAppDb.getReference("Cards");
-        Query query = this.cardsRef.orderByChild("SetName").equalTo(set.Title);
-
-        query.addValueEventListener(new ValueEventListener() {
-
+    private void GetCards(Set set, final int index){
+        firebaseHelper.GetCards(set.Title).addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        setCardAdapter.sets.get(index).Cards.add(document.toObject(Card.class));
+                    }
 
-                for (DataSnapshot d : dataSnapshot.getChildren()) {
-                    Card card = d.getValue(Card.class);
-                    card.Key = d.getKey();
-
-                    set.Cards.add(card);
+                    setCardAdapter.notifyDataSetChanged();
                 }
-
-                setCardAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
     }
@@ -130,24 +111,20 @@ public class MainActivity extends AppCompatActivity {
             Word = "overeat";
             Meaning = "gereğinden fazla yemek";
             Level = 7;
-            AskCount = 4;
-            AnswerCount = 4;
+            Answers = new ArrayList<Boolean>(){{add(true); add(true); add(true); add(true);}};
             SetName = "Verb";
         }},
                 punch = new Card(){{
                     Word = "punch";
                     Meaning = "aletle delmek";
                     Level = 4;
-                    AskCount = 5;
-                    AnswerCount = 3;
+                    Answers = new ArrayList<Boolean>(){{add(false); add(false); add(true); add(true); add(true);}};
                     SetName = "Verb";
                 }},
                 excel = new Card(){{
                     Word = "excel";
                     Meaning = "bir işte üstün olmak";
                     Level = 7;
-                    AskCount = 0;
-                    AnswerCount = 0;
                     Sample = "She excelled in math.";
                     SetName = "Verb";
                 }},
@@ -155,24 +132,21 @@ public class MainActivity extends AppCompatActivity {
                     Word = "plush";
                     Meaning = "pelüş";
                     Level = 7;
-                    AskCount = 4;
-                    AnswerCount = 4;
+                    Answers = new ArrayList<Boolean>(){{add(true); add(true); add(true); add(true);}};
                     SetName = "Adjective";
                 }},
                 fatal = new Card(){{
                     Word = "fatal";
                     Meaning = "ölümcül";
                     Level = 6;
-                    AskCount = 4;
-                    AnswerCount = 3;
+                    Answers = new ArrayList<Boolean>(){{add(false); add(true); add(true); add(true);}};
                     SetName = "Adjective";
                 }},
                 purport = new Card(){{
                     Word = "purport";
                     Meaning = "iddia etmek";
                     Level = 7;
-                    AskCount = 4;
-                    AnswerCount = 3;
+                    Answers = new ArrayList<Boolean>(){{add(false); add(true); add(true); add(true);}};
                     SetName = "Verb";
                 }},
                 withstand = new Card(){{
@@ -195,6 +169,14 @@ public class MainActivity extends AppCompatActivity {
                     SetName = "Verb";
                 }};
 
-        FirebaseHelper fhelp = new FirebaseHelper();
+        firebaseHelper.PutCard(overeat);
+        firebaseHelper.PutCard(punch);
+        firebaseHelper.PutCard(excel);
+        firebaseHelper.PutCard(plush);
+        firebaseHelper.PutCard(fatal);
+        firebaseHelper.PutCard(purport);
+        firebaseHelper.PutCard(withstand);
+        firebaseHelper.PutCard(breakApart);
+        firebaseHelper.PutCard(prefer);
     }
 }

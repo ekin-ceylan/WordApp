@@ -9,12 +9,12 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/crdWord"
         android:layout_width="match_parent"
-        android:layout_height="85dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="10dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="15dp">
 
             <TextView
@@ -35,6 +35,41 @@
                 android:textColor="@color/colorContent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtWord" />
+
+            <TextView
+                android:id="@+id/txtSample"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="txtSample"
+                android:textColor="@color/colorContent"
+                android:textStyle="italic"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtMeaning" />
+
+            <TextView
+                android:id="@+id/txtPerformance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/performance"
+                android:textColor="@color/colorTitle"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtSample" />
+
+            <TextView
+                android:id="@+id/txtStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:text="txtPerformance"
+                android:visibility="gone"
+                app:layout_constraintStart_toEndOf="@+id/txtPerformance"
+                app:layout_constraintTop_toTopOf="@+id/txtPerformance" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </LinearLayout>

@@ -1,7 +1,8 @@
 package com.ekncyln.wordapp.adapters;
 
+import android.animation.AnimatorInflater;
+import android.animation.AnimatorSet;
 import android.content.Context;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.ViewCompat;
 
 import com.ekncyln.wordapp.R;
 import com.ekncyln.wordapp.entities.Card;
@@ -18,13 +20,15 @@ import java.util.List;
 
 public class TestCardAdapter extends ArrayAdapter {
 
-    List<Card> cards;
+    public List<Card> cards;
     Context context;
     int itemLayout;
+    private AnimatorSet flipAnimator;
 
     public TestCardAdapter(List<Card> cards, int resource, Context context) {
 
         super(context, resource, cards);
+        flipAnimator = (AnimatorSet) AnimatorInflater.loadAnimator(context, R.animator.flip_animator);
 
         this.cards = cards;
         this.context = context;
@@ -51,9 +55,7 @@ public class TestCardAdapter extends ArrayAdapter {
         }
 
         if (position == 0){
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                convertView.setTranslationZ(8);
-            }
+            ViewCompat.setElevation(convertView, 8);
         }
 
         TextView txtTestWord = convertView.findViewById(R.id.txtTestWord);
@@ -65,6 +67,10 @@ public class TestCardAdapter extends ArrayAdapter {
         txtTestWord.setText(card.Word);
         txtTestMeaning.setText(card.Meaning);
         txtTestSample.setText(card.Sample);
+
+        if (card.Sample != null){
+            txtTestSample.setVisibility(View.VISIBLE);
+        }
 
         return convertView;
     }

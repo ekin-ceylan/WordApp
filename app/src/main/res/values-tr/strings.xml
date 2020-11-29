@@ -5,4 +5,7 @@
     <string name="learn">Öğren</string>
     <string name="repeat">Tekrar Çalış</string>
     <string name="gotIt">Anladım</string>
+    <string name="repeatDeck">Desteyi Tekrarla</string>
+    <string name="newDeck">Yeni Deste</string>
+    <string name="performance">Başarım</string>
 </resources>

@@ -11,34 +11,27 @@ public class Set implements Serializable {
     public Set() {
         this.Cards = new ArrayList<Card>();
     }
+    public int ExpertPercentage = 0;
+    public int LearningPercentage = 0;
 
-    public int GetExpertCount(){
-        if (this.Cards.size() == 0)
-            return 0;
+    public void CalcCompetence(){
+        this.ExpertPercentage = 0;
+        this.LearningPercentage = 0;
 
-        int expertCount = 0;
+        if (this.Cards.size() == 0){
+            return;
+        }
 
         for (Card card : this.Cards) {
-            if (card.AskCount == card.AnswerCount && card.AskCount > 0) {
-                expertCount++;
+            if (card.getLearningStatus() == LearningStatus.LEARNT) {
+                this.ExpertPercentage++;
+            }
+            else if (card.getLearningStatus() == LearningStatus.LEARNING) {
+                this.LearningPercentage++;
             }
         }
 
-        return expertCount * 100/this.Cards.size();
-    }
-
-    public int GetLearningCount(){
-        if (this.Cards.size() == 0)
-            return 0;
-
-        int learningCount = 0;
-
-        for (Card card : this.Cards) {
-            if (card.AskCount > card.AnswerCount && card.AskCount > 0) {
-                learningCount++;
-            }
-        }
-
-        return learningCount * 100/this.Cards.size();
+        this.ExpertPercentage = this.ExpertPercentage * 100/this.Cards.size();
+        this.LearningPercentage = this.LearningPercentage * 100/this.Cards.size();
     }
 }

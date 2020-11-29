@@ -7,6 +7,35 @@
     android:gravity="center"
     tools:context=".TestActivity">
 
+    <Button
+        android:id="@+id/btnRepeatDeck"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:text="@string/repeatDeck"
+        android:textColor="@color/cardview_light_background"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/stcViewCard"
+        app:layout_constraintEnd_toEndOf="@+id/stcViewCard"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/stcViewCard"
+        app:layout_constraintTop_toTopOf="@+id/stcViewCard" />
+
+    <Button
+        android:id="@+id/btnNewDeck"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@color/colorAccent"
+        android:text="@string/newDeck"
+        android:textColor="@color/cardview_light_background"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/stcViewCard"
+        app:layout_constraintStart_toStartOf="@+id/stcViewCard"
+        app:layout_constraintTop_toBottomOf="@+id/btnRepeatDeck" />
+
     <com.lorentzos.flingswipe.SwipeFlingAdapterView
         android:id="@+id/stcViewCard"
         android:layout_width="match_parent"
@@ -44,6 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="100dp"
         android:background="@color/colorKnown"
+        android:gravity="center_horizontal"
         android:paddingLeft="15dp"
         android:paddingTop="10dp"
         android:paddingRight="15dp"
@@ -53,7 +83,6 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:gravity="center_horizontal" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

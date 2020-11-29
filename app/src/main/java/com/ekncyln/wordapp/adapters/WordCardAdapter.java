@@ -32,6 +32,8 @@ public class WordCardAdapter extends RecyclerView.Adapter<WordCardView> {
         Card card = cards.get(position);
         holder.txtMeaning.setText(card.Meaning);
         holder.txtWord.setText(card.Word);
+        holder.txtSample.setText(card.Sample);
+        holder.txtStatus.setText(card.getPerformance() + "%");
     }
 
     @Override
